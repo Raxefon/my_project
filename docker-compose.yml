@@ -1,0 +1,36 @@
+services:
+
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my_project
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - my_project
+    environment:
+      - APP_ENV=dev
+    ports:
+      - "9001:9000"
+
+  db:
+    image: mysql:8.0
+    container_name: my_project_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: my_project
+      MYSQL_USER: my_project
+      MYSQL_PASSWORD: 123123
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - my_project
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data:
+
+networks:
+  my_project:
