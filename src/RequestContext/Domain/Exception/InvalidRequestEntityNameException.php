@@ -2,7 +2,7 @@
 
 namespace App\RequestContext\Domain\Exception;
 
-class RequestEntityNotFoundException extends \Exception
+class InvalidRequestEntityNameException extends \Exception
 {
     public function __construct(string $message = "")
     {

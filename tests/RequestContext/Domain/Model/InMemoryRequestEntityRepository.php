@@ -6,7 +6,7 @@ use App\RequestContext\Domain\Model\RequestEntity;
 use App\RequestContext\Domain\Model\RequestEntityRepository;
 use App\Tests\ddd\Domain\Model\InMemoryRepository;
 
-class InMemoryRequestRepository extends InMemoryRepository implements RequestEntityRepository
+class InMemoryRequestEntityRepository extends InMemoryRepository implements RequestEntityRepository
 {
 
     public function findAll(): array
@@ -27,5 +27,16 @@ class InMemoryRequestRepository extends InMemoryRepository implements RequestEnt
     public function delete(RequestEntity $requestEntity): void
     {
         $this->unset($requestEntity);
+    }
+
+    public function findByName(string $name): ?RequestEntity
+    {
+        foreach ($this->allEntities() as $entity) {
+            if ($entity->name() === $name) {
+                return $entity;
+            }
+        }
+
+        return null;
     }
 }

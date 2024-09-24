@@ -11,4 +11,6 @@ interface RequestEntityRepository
     public function save(RequestEntity $requestEntity): void;
 
     public function delete(RequestEntity $requestEntity): void;
+
+    public function findByName(string $name): ?RequestEntity;
 }
