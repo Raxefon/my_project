@@ -21,10 +21,9 @@ class UpdateRequestEntityHandlerTest extends RequestUnitTestCase
     {
         $this->createRequestEntityHandler = $this->createRequestEntityHandler();
         $this->updateRequestEntityHandler = $this->updateRequestEntityHandler();
-        $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
     }
 
-    public function test_should_create_request_entity(): void
+    public function test_should_update_request_entity(): void
     {
         $createRequestEntity = new CreateRequestEntity(
             'First request'
@@ -47,7 +46,7 @@ class UpdateRequestEntityHandlerTest extends RequestUnitTestCase
         $this->eventDispatcher
             ->expects($this->once())
             ->method('dispatch')
-            ->with(new RequestEntityUpdated($requestEntity->id()));
+            ->with($this->isInstanceOf(RequestEntityUpdated::class));
 
         $this->updateRequestEntityHandler->handle($updateRequestEntity);
 

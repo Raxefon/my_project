@@ -24,7 +24,7 @@ abstract class RequestUnitTestCase extends TestCase
     protected function eventDispatcher(): EventDispatcherInterface
     {
         if (!isset($this->eventDispatcher)) {
-            $this->eventDispatcher = new EventDispatcher();
+            $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         }
 
         return $this->eventDispatcher;
