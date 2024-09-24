@@ -3,6 +3,7 @@
 namespace App\Tests\RequestContext\Application\Command;
 
 use App\RequestContext\Domain\Command\CreateRequestEntity;
+use App\RequestContext\Domain\Event\RequestEntityCreated;
 use App\RequestContext\Domain\Exception\InvalidRequestEntityNameException;
 use App\RequestContext\Domain\Exception\RequestEntityAlreadyExistsException;
 use App\RequestContext\Domain\Model\RequestEntity;
@@ -24,6 +25,11 @@ class CreateRequestEntityHandlerTest extends RequestUnitTestCase
         $createRequestEntity = new CreateRequestEntity(
             'First request'
         );
+
+        $this->eventDispatcher
+            ->expects($this->once())
+            ->method('dispatch')
+            ->with($this->isInstanceOf(RequestEntityCreated::class));
 
         $this->createRequestEntityHandler->handle($createRequestEntity);
 

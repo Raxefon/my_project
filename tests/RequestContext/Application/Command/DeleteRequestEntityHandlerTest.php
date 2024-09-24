@@ -4,6 +4,7 @@ namespace App\Tests\RequestContext\Application\Command;
 
 use App\RequestContext\Domain\Command\CreateRequestEntity;
 use App\RequestContext\Domain\Command\DeleteRequestEntity;
+use App\RequestContext\Domain\Event\RequestEntityDeleted;
 use App\RequestContext\Domain\Exception\RequestEntityNotFoundException;
 use App\RequestContext\Domain\Model\RequestEntity;
 use App\Tests\RequestContext\RequestUnitTestCase;
@@ -36,6 +37,11 @@ class DeleteRequestEntityHandlerTest extends RequestUnitTestCase
         $deleteRequestEntity = new DeleteRequestEntity(
             $requestEntity->id()
         );
+
+        $this->eventDispatcher
+            ->expects($this->once())
+            ->method('dispatch')
+            ->with($this->isInstanceOf(RequestEntityDeleted::class));
 
         $this->deleteRequestEntityHandler->handle($deleteRequestEntity);
 

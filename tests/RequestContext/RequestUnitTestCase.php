@@ -34,7 +34,8 @@ abstract class RequestUnitTestCase extends TestCase
     {
         if (!isset($this->createRequestEntityHandler)) {
             $this->createRequestEntityHandler = new CreateRequestEntityHandler(
-                $this->requestEntityRepository()
+                $this->requestEntityRepository(),
+                $this->eventDispatcher()
             );
         }
 
