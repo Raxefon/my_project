@@ -2,7 +2,9 @@
 
 namespace App\RequestContext\Domain\Command;
 
-class UpdateRequestEntity
+use App\RequestContext\Domain\Permission\RequestEntityEntitlementPermissable;
+
+class UpdateRequestEntity implements RequestEntityEntitlementPermissable
 {
     private string $id;
     private string $name;

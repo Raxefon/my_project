@@ -2,7 +2,9 @@
 
 namespace App\RequestContext\Domain\Command;
 
-class CreateRequestEntity
+use App\RequestContext\Domain\Permission\RequestEntityEntitlementPermissable;
+
+class CreateRequestEntity implements RequestEntityEntitlementPermissable
 {
     private string $name;
 

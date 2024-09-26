@@ -2,7 +2,9 @@
 
 namespace App\RequestContext\Domain\Command;
 
-class DeleteRequestEntity
+use App\RequestContext\Domain\Permission\RequestEntityEntitlementPermissable;
+
+class DeleteRequestEntity implements RequestEntityEntitlementPermissable
 {
     private string $id;
 
