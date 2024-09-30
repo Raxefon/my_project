@@ -2,7 +2,7 @@
 
 namespace App\RequestContext\Domain\Event;
 
-class RequestEntityUpdated
+class RequestEntityNameUpdated
 {
     private string $id;
 

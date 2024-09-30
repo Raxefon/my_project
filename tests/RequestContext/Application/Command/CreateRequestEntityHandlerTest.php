@@ -66,4 +66,26 @@ class CreateRequestEntityHandlerTest extends RequestUnitTestCase
         $createRequestEntityDuplicate = new CreateRequestEntity('Duplicate name');
         $this->createRequestEntityHandler->handle($createRequestEntityDuplicate);
     }
+
+    public function test_should_create_request_entity_with_pending_status(): void
+    {
+        $createRequestEntity = new CreateRequestEntity(
+            'Pending request'
+        );
+
+        $this->eventDispatcher
+            ->expects($this->once())
+            ->method('dispatch')
+            ->with($this->isInstanceOf(RequestEntityCreated::class));
+
+        $this->createRequestEntityHandler->handle($createRequestEntity);
+
+        /** @var RequestEntity $requestEntity */
+        $requestEntity = $this->requestEntityRepository()->first();
+
+        $this->assertNotNull($requestEntity);
+        $this->assertEquals('Pending request', $requestEntity->name());
+
+        $this->assertTrue($requestEntity->requestStatus()->isPending());
+    }
 }

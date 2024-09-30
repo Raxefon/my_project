@@ -57,7 +57,7 @@ vendor: c=install --prefer-dist --no-progress --no-scripts --no-interaction
 vendor: composer
 
 ##
-## —— Symfony 🎵 ———————————————————————————————————————————————————————————————
+## —— Symfony ———————————————————————————————————————————————————————————————
 console: ## List all Symfony commands or pass the parameter "c=" to run a given command, example: make console c='cache:clear'
 	@$(eval c ?=)
 	@$(SYMFONY) $(c)
@@ -124,14 +124,5 @@ yaml: ## Run YAML linter
 phparkitect: ## Run phparkitect
 	@$(PHP) vendor/bin/phparkitect check
 
-check-editorconfig: ## Runc editorconfic checker
-	@$(PHP_CONT) vendor/bin/ec
-
 grump-init: ## Update grump hoooks or init
 	@$(PHP_CONT) vendor/bin/grumphp git:init
-
-##
-## —— Symfony 🎶 ———————————————————————————————————————————————————————————————
-dotenv: ## Load .env file (use "f=" to load a specific function, example: make dotenv f=APP_ENV)
-	@$(eval f ?=)
-	$(SYMFONY) my_project:dotenv $f
