@@ -1,0 +1,5 @@
+services:
+  webserver:
+    environment:
+      XDEBUG_MODE: 'debug'
+      PHP_IDE_CONFIG: 'serverName=docker'
